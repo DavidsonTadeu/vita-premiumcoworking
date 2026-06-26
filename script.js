@@ -618,8 +618,27 @@ function initParallax() {
     submitLoading.style.display = 'flex';
     submitBtn.disabled = true;
 
-    // Simulate async submit
-    setTimeout(() => {
+    // Real async submit to FormSubmit
+    const payload = {
+      name: name.value,
+      email: email.value,
+      phone: document.getElementById('formPhone').value,
+      service: service.value,
+      message: document.getElementById('formMessage').value,
+      _subject: `Novo agendamento: ${name.value}`,
+      _template: 'table'
+    };
+
+    fetch('https://formsubmit.co/ajax/dtchurrasco@gmail.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(response => response.json())
+    .then(data => {
       gsap.to(form, {
         opacity: 0,
         y: -20,
@@ -633,7 +652,14 @@ function initParallax() {
           );
         }
       });
-    }, 1800);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente ou chame no WhatsApp.');
+      submitText.style.display    = 'inline';
+      submitLoading.style.display = 'none';
+      submitBtn.disabled = false;
+    });
   });
 
   resetBtn && resetBtn.addEventListener('click', () => {
