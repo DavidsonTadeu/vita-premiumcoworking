@@ -629,7 +629,7 @@ function initParallax() {
       _template: 'table'
     };
 
-    fetch('https://formsubmit.co/ajax/dtchurrasco@gmail.com', {
+    fetch('https://formsubmit.co/ajax/ecal7450@gmail.com', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
