@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vita Premium Coworking — Onde produtividade encontra sofisticação. Espaços exclusivos no coração da Savassi, Belo Horizonte." />
+  <meta name="keywords" content="coworking premium, espaço de trabalho, salas privativas, reunião, networking, produtividade, Savassi, Belo Horizonte, Edifício Álvares da Silva" />
+  <meta property="og:title" content="Vita Premium Coworking — Savassi, BH" />
+  <meta property="og:description" content="Eleve seu trabalho a um novo patamar. Espaços exclusivos para mentes extraordinárias." />
+  <meta name="theme-color" content="#080810" />
+  <title>Vita Premium Coworking — Espaço que Inspira Grandeza</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
+
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== COOKIE CONSENT BANNER ===== -->
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-labelledby="cookieTitle" aria-live="polite">
+    <div class="cookie-inner">
+      <div class="cookie-text">
+        <div class="cookie-icon">🍪</div>
+        <div>
+          <strong id="cookieTitle">Usamos Cookies</strong>
+          <p>Utilizamos cookies para melhorar sua experiência de navegação, personalizar conteúdo e analisar nosso tráfego. Ao continuar, você concorda com nossa <a href="#" class="cookie-link">Política de Privacidade</a>.</p>
+        </div>
+      </div>
+      <div class="cookie-actions">
+        <label class="cookie-checkbox-wrap">
+          <input type="checkbox" id="cookieAccept" checked />
+          <span class="cookie-checkmark"></span>
+          <span>Li e aceito os termos e cookies</span>
+        </label>
+        <button class="cookie-btn-reject" id="cookieReject">Apenas essenciais</button>
+        <button class="cookie-btn-accept" id="cookieConfirm">Aceitar e fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- Loading Screen -->
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">
+        <span class="loader-v">V</span>
+        <span class="loader-text">ita</span>
+      </div>
+      <div class="loader-bar">
+        <div class="loader-progress" id="loaderProgress"></div>
+      </div>
+      <p class="loader-subtitle">Preparando sua experiência...</p>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="#hero" class="logo" aria-label="Vita Premium Coworking">
+        <div class="logo-icon">V</div>
+        <span class="logo-name">ita <em>Premium</em></span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Navegação principal">
+        <ul class="nav-list">
+          <li><a href="#services" class="nav-link">Espaços</a></li>
+          <li><a href="#gallery" class="nav-link">Galeria</a></li>
+          <li><a href="#about" class="nav-link">Sobre</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+          <li><a href="#contact" class="nav-link">Contato</a></li>
+        </ul>
+      </nav>
+      <a href="#contact" class="btn-cta magnetic" id="headerCta">
+        <span>Agende uma Visita</span>
+        <div class="btn-glow"></div>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <nav>
+      <ul>
+        <li><a href="#services" class="mobile-nav-link">Espaços</a></li>
+        <li><a href="#gallery" class="mobile-nav-link">Galeria</a></li>
+        <li><a href="#about" class="mobile-nav-link">Sobre</a></li>
+        <li><a href="#faq" class="mobile-nav-link">FAQ</a></li>
+        <li><a href="#contact" class="mobile-nav-link">Contato</a></li>
+        <li><a href="#contact" class="btn-cta mobile-cta"><span>Agende uma Visita</span></a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <main>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="hero">
+      <canvas id="heroCanvas"></canvas>
+      <div class="hero-gradient"></div>
+
+      <div class="hero-content">
+        <div class="hero-badge reveal-up">
+          <span class="badge-dot"></span>
+          <span>Premium Coworking · Savassi, Belo Horizonte</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="hero-line" data-reveal>
+            <span class="word-wrap"><span class="word">Onde</span></span>
+            <span class="word-wrap"><span class="word">Grandes</span></span>
+          </span>
+          <span class="hero-line" data-reveal>
+            <span class="word-wrap"><span class="word highlight-copper">Mentes</span></span>
+            <span class="word-wrap"><span class="word">Florescem</span></span>
+          </span>
+        </h1>
+
+        <p class="hero-sub reveal-up" data-delay="0.6">
+          Espaços de trabalho cuidadosamente projetados para profissionais
+          que buscam produtividade, sofisticação e conexões que transformam.
+        </p>
+
+        <div class="hero-actions reveal-up" data-delay="0.9">
+          <a href="#contact" class="btn-primary magnetic" id="heroCta">
+            <span>Comece Agora</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+          <a href="#gallery" class="btn-ghost">
+            <span class="btn-ghost-icon">▶</span>
+            <span>Conheça o Espaço</span>
+          </a>
+        </div>
+
+
+      </div>
+
+      <div class="hero-image-container parallax-element" data-speed="0.3">
+        <div class="hero-image-frame">
+          <img src="images/real_training.jpg" alt="Sala de treinamento e consultoria Vita Coworking" class="hero-img" id="heroImg" />
+          <div class="hero-image-overlay"></div>
+        </div>
+        <div class="hero-float-card glass-card">
+          <div class="float-icon">✦</div>
+          <div>
+            <strong>Ambiente Inspirador</strong>
+            <span>Design de interiores exclusivo</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-indicator">
+        <div class="scroll-line"></div>
+        <span>Role para explorar</span>
+      </div>
+    </section>
+
+    <!-- ===== MARQUEE ===== -->
+    <div class="marquee-section" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-content">
+          <span>Salas Privativas</span><span class="sep">✦</span>
+          <span>Networking Premium</span><span class="sep">✦</span>
+          <span>Alta Produtividade</span><span class="sep">✦</span>
+          <span>Policiamento Local</span><span class="sep">✦</span>
+          <span>Infraestrutura 5G</span><span class="sep">✦</span>
+          <span>Endereço Fiscal</span><span class="sep">✦</span>
+          <span>Salas de Reunião</span><span class="sep">✦</span>
+          <span>Ambiente Seguro</span><span class="sep">✦</span>
+          <span>Salas Privativas</span><span class="sep">✦</span>
+          <span>Networking Premium</span><span class="sep">✦</span>
+          <span>Alta Produtividade</span><span class="sep">✦</span>
+          <span>Policiamento Local</span><span class="sep">✦</span>
+          <span>Infraestrutura 5G</span><span class="sep">✦</span>
+          <span>Endereço Fiscal</span><span class="sep">✦</span>
+          <span>Salas de Reunião</span><span class="sep">✦</span>
+          <span>Ambiente Seguro</span><span class="sep">✦</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SERVICES SECTION ===== -->
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-tag reveal-up">Nossos Espaços</p>
+          <h2 class="section-title reveal-up">
+            Cada Espaço,<br /><em class="copper">Uma Experiência</em>
+          </h2>
+          <p class="section-desc reveal-up">
+            Ambientes meticulosamente projetados para diferentes necessidades,<br />
+            todos com o mesmo padrão de excelência Vita.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <!-- Card 1 — Sala de Treinamento -->
+          <div class="service-card glass-card reveal-up" data-index="0">
+            <div class="card-number">01</div>
+            <div class="card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M9 3v18M3 9h6M3 15h6"/>
+              </svg>
+            </div>
+            <h3>Sala de Treinamento</h3>
+            <p>Ambiente ideal para consultorias, orientações e treinamentos individuais. Equipada com whiteboard, boa iluminação e plantas que criam um clima de concentração e bem-estar.</p>
+            <ul class="card-features">
+              <li><span>✓</span> Whiteboard incluso</li>
+              <li><span>✓</span> Iluminação natural</li>
+              <li><span>✓</span> Privacidade total</li>
+              <li><span>✓</span> Plantas e ambiente zen</li>
+            </ul>
+            <div class="card-img-wrap">
+              <img src="images/real_training.jpg" alt="Sala de Treinamento Vita" loading="lazy" />
+              <div class="card-img-overlay"></div>
+            </div>
+            <a href="#contact" class="card-link">
+              <span>Saiba Mais</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          </div>
+
+          <!-- Card 2 — Large -->
+          <div class="service-card service-card--large glass-card reveal-up" data-index="1">
+            <div class="card-number">02</div>
+            <div class="card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3>Mesas Compartilhadas</h3>
+            <p>Ambiente colaborativo de alto nível onde networking acontece naturalmente. Estações individuais com privacidade garantida em um espaço que inspira conexões valiosas.</p>
+            <ul class="card-features">
+              <li><span>✓</span> Estação ergonômica dedicada</li>
+              <li><span>✓</span> Wi-Fi 5G dedicado</li>
+              <li><span>✓</span> Café gourmet ilimitado</li>
+              <li><span>✓</span> Armários privativos</li>
+            </ul>
+            <div class="card-img-wrap">
+              <img src="images/real_shared.jpg" alt="Espaço Compartilhado Vita" loading="lazy" />
+              <div class="card-img-overlay"></div>
+            </div>
+            <div class="card-badge">Mais Popular</div>
+            <a href="#contact" class="card-link">
+              <span>Saiba Mais</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="service-card glass-card reveal-up" data-index="2">
+            <div class="card-number">03</div>
+            <div class="card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="7" width="20" height="15" rx="2"/>
+                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M12 12v5M8 12v5M16 12v5"/>
+              </svg>
+            </div>
+            <h3>Salas de Reunião</h3>
+            <p>Boardrooms de alto padrão equipadas com tecnologia de conferência de última geração. Impressione seus clientes e parceiros em um ambiente que reflete excelência.</p>
+            <ul class="card-features">
+              <li><span>✓</span> Tv 85" 4K e projetor</li>
+              <li><span>✓</span> Sistema de vídeo conferência</li>
+              <li><span>✓</span> Whiteboard digital</li>
+              <li><span>✓</span> Serviço de coffee break</li>
+            </ul>
+            <div class="card-img-wrap">
+              <img src="images/real_meeting.jpg" alt="Sala de Reunião Vita" loading="lazy" />
+              <div class="card-img-overlay"></div>
+            </div>
+            <a href="#contact" class="card-link">
+              <span>Saiba Mais</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          </div>
+
+          <!-- Card 4 — Auditório/Eventos -->
+          <div class="service-card glass-card reveal-up" data-index="3">
+            <div class="card-number">04</div>
+            <div class="card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M17 8h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2v4l-4-4H9a2 2 0 0 1-2-2v-1"/>
+                <path d="M4 4h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
+              </svg>
+            </div>
+            <h3>Auditório &amp; Eventos</h3>
+            <p>Espaço para cursos, treinamentos, palestras e eventos corporativos. Capacidade para até 30 pessoas com cadeiras confortáveis e iluminação profissional.</p>
+            <ul class="card-features">
+              <li><span>✓</span> Capacidade até 30 pessoas</li>
+              <li><span>✓</span> Ar-condicionado central</li>
+              <li><span>✓</span> Vista para o centro de BH</li>
+              <li><span>✓</span> Ideal para treinamentos</li>
+            </ul>
+            <div class="card-img-wrap">
+              <img src="images/real_auditorium.jpg" alt="Auditório Vita Coworking" loading="lazy" />
+              <div class="card-img-overlay"></div>
+            </div>
+            <a href="#contact" class="card-link">
+              <span>Saiba Mais</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          </div>
+
+          <!-- Card 5 — Lounge/Atendimento -->
+          <div class="service-card service-card--large glass-card reveal-up" data-index="4">
+            <div class="card-number">05</div>
+            <div class="card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <h3>Lounge &amp; Atendimento</h3>
+            <p>Ambiente acolhedor para receber clientes com sofisticação. Poltronas confortáveis, ambiente climatizado e decoração selecionada para causar a melhor primeira impressão.</p>
+            <ul class="card-features">
+              <li><span>✓</span> Recepção de clientes</li>
+              <li><span>✓</span> Ambiente climatizado</li>
+              <li><span>✓</span> Café e água disponíveis</li>
+              <li><span>✓</span> Decoração exclusiva</li>
+            </ul>
+            <div class="card-img-wrap">
+              <img src="images/real_lounge.jpg" alt="Lounge Vita Coworking" loading="lazy" />
+              <div class="card-img-overlay"></div>
+            </div>
+            <a href="#contact" class="card-link">
+              <span>Saiba Mais</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          </div>
+
+          <!-- Card 6 — Salas Privativas -->
+          <div class="service-card glass-card reveal-up" data-index="5">
+            <div class="card-number">06</div>
+            <div class="card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <h3>Salas Privativas</h3>
+            <p>Escritórios privativos com isolamento acústico premium, mobiliário ergonômico e climatização individual. Sua empresa, seu ambiente.</p>
+            <ul class="card-features">
+              <li><span>✓</span> Isolamento acústico total</li>
+              <li><span>✓</span> Acesso 24h/7 dias</li>
+              <li><span>✓</span> Mobiliário ergonômico</li>
+              <li><span>✓</span> Recepção personalizada</li>
+            </ul>
+            <div class="card-img-wrap">
+              <img src="images/real_private.jpg" alt="Sala Privativa Vita" loading="lazy" />
+              <div class="card-img-overlay"></div>
+            </div>
+            <a href="#contact" class="card-link">
+              <span>Saiba Mais</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT / MANIFESTO ===== -->
+    <section class="about" id="about">
+      <div class="about-bg-grid"></div>
+      <div class="container about-inner">
+        <div class="about-visual parallax-element" data-speed="0.15">
+          <div class="about-img-main">
+            <img src="images/real_lounge.jpg" alt="Vita Coworking Premium" loading="lazy" />
+            <div class="about-img-badge glass-card">
+              <strong>Savassi</strong>
+              <span>No coração de BH</span>
+            </div>
+          </div>
+          <div class="about-img-secondary">
+            <img src="images/real_private.jpg" alt="Sala privativa no Vita" loading="lazy" />
+          </div>
+
+        </div>
+
+        <div class="about-content">
+          <p class="section-tag reveal-up">Nosso Manifesto</p>
+          <h2 class="section-title reveal-up">
+            Acreditamos que o ambiente molda resultados
+          </h2>
+          <p class="about-text reveal-up">
+            Vita nasceu da convicção de que profissionais excepcionais merecem mais do que mesas e cadeiras. Merecem um ecossistema cuidadosamente projetado para catalizar crescimento, criatividade e conexões transformadoras.
+          </p>
+          <p class="about-text reveal-up">
+            Cada detalhe do nosso espaço — da iluminação ao mobiliário, da acústica ao café — foi pensado para que você entre em seu estado de fluxo máximo e produza trabalhos extraordinários.
+          </p>
+
+          <div class="about-values">
+            <div class="value-item reveal-up">
+              <div class="value-icon">✦</div>
+              <div>
+                <strong>Design com Propósito</strong>
+                <span>Estética que serve à produtividade</span>
+              </div>
+            </div>
+            <div class="value-item reveal-up">
+              <div class="value-icon">◈</div>
+              <div>
+                <strong>Comunidade Curada</strong>
+                <span>Conexões que transformam negócios</span>
+              </div>
+            </div>
+            <div class="value-item reveal-up">
+              <div class="value-icon">◎</div>
+              <div>
+                <strong>Excelência Constante</strong>
+                <span>Padrão premium sem concessões</span>
+              </div>
+            </div>
+            <div class="value-item reveal-up">
+              <div class="value-icon security-icon">🛡</div>
+              <div>
+                <strong>Policiamento Local</strong>
+                <span>Ambiente seguro e confortável na Savassi — região com policiamento constante para sua tranquilidade</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GALLERY SECTION ===== -->
+    <section class="gallery" id="gallery">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-tag reveal-up">Galeria Imersiva</p>
+          <h2 class="section-title reveal-up">
+            Veja onde a<br /><em class="copper">magia acontece</em>
+          </h2>
+        </div>
+      </div>
+
+      <div class="gallery-track" id="galleryTrack">
+        <div class="gallery-item gallery-item--tall" data-speed="-0.1">
+          <img src="images/real_meeting.jpg" alt="Sala de Reunião Vita Coworking" loading="lazy" />
+          <div class="gallery-overlay"><span>Sala de Reunião</span></div>
+        </div>
+        <div class="gallery-item" data-speed="0.15">
+          <img src="images/real_private.jpg" alt="Sala Privativa" loading="lazy" />
+          <div class="gallery-overlay"><span>Salas Privativas</span></div>
+        </div>
+        <div class="gallery-item gallery-item--wide" data-speed="0">
+          <img src="images/real_shared.jpg" alt="Espaço Compartilhado" loading="lazy" />
+          <div class="gallery-overlay"><span>Área Colaborativa</span></div>
+        </div>
+        <div class="gallery-item" data-speed="0.2">
+          <img src="images/real_lounge.jpg" alt="Lounge de Atendimento" loading="lazy" />
+          <div class="gallery-overlay"><span>Lounge &amp; Atendimento</span></div>
+        </div>
+        <div class="gallery-item" data-speed="-0.05">
+          <img src="images/real_training.jpg" alt="Sala de Treinamento" loading="lazy" />
+          <div class="gallery-overlay"><span>Sala de Treinamento</span></div>
+        </div>
+        <div class="gallery-item gallery-item--tall" data-speed="0.1">
+          <img src="images/real_auditorium.jpg" alt="Auditório Vita" loading="lazy" />
+          <div class="gallery-overlay"><span>Auditório &amp; Eventos</span></div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-tag reveal-up">Depoimentos</p>
+          <h2 class="section-title reveal-up">O que nossos<br /><em class="copper">membros dizem</em></h2>
+          <p class="section-desc reveal-up">Faça parte do Vita e compartilhe sua experiência com a nossa comunidade.</p>
+        </div>
+
+        <!-- Testimonials grid: populated dynamically from localStorage -->
+        <div class="testimonials-grid" id="testimonialsGrid">
+          <!-- Cards appear here after submitted -->
+          <div class="testimonials-empty reveal-up" id="testimonialsEmpty">
+            <div class="testimonials-empty-icon">💬</div>
+            <p>Seja o primeiro a compartilhar sua experiência no Vita!</p>
+          </div>
+        </div>
+
+        <!-- CTA to open the form -->
+        <div class="testimonial-cta reveal-up">
+          <button class="btn-primary magnetic" id="openTestimonialFormBtn">
+            <span>Deixar meu Depoimento</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+
+        <!-- Testimonial Submission Form (hidden by default) -->
+        <div class="testimonial-form-wrap glass-card" id="testimonialFormWrap" style="display:none;">
+          <button class="testimonial-form-close" id="closeTestimonialFormBtn" aria-label="Fechar formulário">✕</button>
+          <h3>Compartilhe sua experiência</h3>
+          <p class="form-subtitle">Seu depoimento ajuda outras pessoas a conhecerem o Vita.</p>
+          <form id="testimonialForm" novalidate>
+            <div class="form-group">
+              <input type="text" id="tName" name="tName" class="form-input" required placeholder=" " />
+              <label for="tName" class="form-label">Seu nome *</label>
+              <span class="form-border"></span>
+            </div>
+            <div class="form-group">
+              <input type="text" id="tRole" name="tRole" class="form-input" placeholder=" " />
+              <label for="tRole" class="form-label">Cargo / Empresa (opcional)</label>
+              <span class="form-border"></span>
+            </div>
+            <div class="form-group">
+              <div class="star-rating" id="starRating" role="group" aria-label="Avaliação">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+              </div>
+              <input type="hidden" id="tRating" name="tRating" value="5" />
+            </div>
+            <div class="form-group">
+              <textarea id="tMessage" name="tMessage" class="form-input form-textarea" rows="4" required placeholder=" "></textarea>
+              <label for="tMessage" class="form-label">Seu depoimento *</label>
+              <span class="form-border"></span>
+            </div>
+            <button type="submit" class="btn-submit" id="testimonialSubmitBtn">
+              <span>Publicar Depoimento</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-tag reveal-up">Dúvidas Frequentes</p>
+          <h2 class="section-title reveal-up">
+            Tudo que você<br /><em class="copper">precisa saber</em>
+          </h2>
+        </div>
+
+        <div class="faq-list reveal-up">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq1-answer">
+              <span>O espaço funciona 24 horas por dia?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="faq1-answer" role="region">
+              <p>Sim! Membros dos planos Profissional e Corporativo têm acesso 24h/7 dias por semana com controle de acesso seguro. O plano Essencial tem acesso das 8h às 20h nos dias úteis e das 8h às 14h aos sábados.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq2-answer">
+              <span>Como funciona o endereço fiscal?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="faq2-answer" role="region">
+              <p>Todos os nossos planos incluem o uso do endereço do Vita (Edifício Álvares da Silva, Av. Getúlio Vargas, 1420 - Savassi) como sede da sua empresa. Também realizamos recebimento e gestão de correspondências.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq3-answer">
+              <span>Posso trazer clientes e convidados para reuniões?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="faq3-answer" role="region">
+              <p>Claro! Nossas salas de reunião foram projetadas exatamente para isso. Você pode receber clientes com toda a infraestrutura necessária — TV 4K, videoconferência e coffee break opcional. As reservas são feitas de forma simples via WhatsApp.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq4-answer">
+              <span>Qual a política de cancelamento?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="faq4-answer" role="region">
+              <p>Trabalhamos com contratos mensais e sem fidelidade obrigatória. O cancelamento pode ser solicitado com aviso prévio de 30 dias. Para planos anuais, há condições especiais de desconto — consulte nosso time.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq5-answer">
+              <span>O local é seguro? Tem estacionamento?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="faq5-answer" role="region">
+              <p>A Savassi é uma das regiões mais seguras e movimentadas de BH, com policiamento constante. O Edifício Álvares da Silva conta com portaria 24h, câmeras de segurança e controle de acesso. Há estacionamentos conveniados na região.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq6-answer">
+              <span>Posso agendar uma visita antes de assinar?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="faq6-answer" role="region">
+              <p>Com certeza! Incentivamos você a conhecer o espaço pessoalmente antes de qualquer decisão. Entre em contato pelo WhatsApp <a href="https://wa.me/5531973313868" target="_blank" rel="noopener">+55 (31) 97331-3868</a> e agendaremos uma visita guiada no melhor horário para você.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section class="contact" id="contact">
+      <div class="contact-bg"></div>
+      <div class="container contact-inner">
+        <div class="contact-info">
+          <p class="section-tag reveal-up">Fale Conosco</p>
+          <h2 class="section-title reveal-up">
+            Seu próximo<br />nível começa<br /><em class="copper">aqui.</em>
+          </h2>
+          <p class="reveal-up">Agende sua visita presencial e descubra pessoalmente porque o Vita é o espaço que faltava para sua carreira ou empresa decolar.</p>
+
+          <div class="contact-details reveal-up">
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div>
+                <strong>Endereço</strong>
+                <span>Edifício Álvares da Silva<br />Av. Getúlio Vargas, 1420 · Savassi<br />Belo Horizonte - MG · CEP 30112-021</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📞</div>
+              <div>
+                <strong>Telefone / WhatsApp</strong>
+                <span><a href="https://wa.me/5531973313868" class="contact-tel-link">+55 (31) 97331-3868</a></span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">✉️</div>
+              <div>
+                <strong>E-mail</strong>
+                <span>contato@vitacoworking.com.br</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">🕐</div>
+              <div>
+                <strong>Horário de Visitação</strong>
+                <span>Seg – Sex: 8h às 20h<br />Sáb: 8h às 14h</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="social-links reveal-up">
+            <a href="#" class="social-link" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="LinkedIn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://wa.me/5531973313868" class="social-link" aria-label="WhatsApp" target="_blank" rel="noopener">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap reveal-up">
+          <form class="contact-form glass-card" id="contactForm" novalidate>
+            <h3>Agende sua Visita</h3>
+            <p class="form-subtitle">Preencha o formulário e entraremos em contato em até 2 horas úteis.</p>
+
+            <div class="form-group">
+              <input type="text" id="formName" name="name" class="form-input" required placeholder=" " autocomplete="name" />
+              <label for="formName" class="form-label">Nome completo *</label>
+              <span class="form-border"></span>
+            </div>
+
+            <div class="form-group">
+              <input type="email" id="formEmail" name="email" class="form-input" required placeholder=" " autocomplete="email" />
+              <label for="formEmail" class="form-label">E-mail corporativo *</label>
+              <span class="form-border"></span>
+            </div>
+
+            <div class="form-group">
+              <input type="tel" id="formPhone" name="phone" class="form-input" placeholder=" " autocomplete="tel" />
+              <label for="formPhone" class="form-label">Telefone / WhatsApp</label>
+              <span class="form-border"></span>
+            </div>
+
+            <div class="form-group">
+              <select id="formService" name="service" class="form-input form-select" required>
+                <option value="" disabled selected></option>
+                <option value="privativa">Sala Privativa</option>
+                <option value="compartilhada">Mesa Compartilhada</option>
+                <option value="reuniao">Sala de Reunião</option>
+                <option value="auditorio">Auditório &amp; Eventos</option>
+                <option value="lounge">Lounge &amp; Atendimento</option>
+                <option value="outro">Outro / Dúvidas</option>
+              </select>
+              <label for="formService" class="form-label form-label--select">Interesse *</label>
+              <span class="form-border"></span>
+            </div>
+
+            <div class="form-group">
+              <textarea id="formMessage" name="message" class="form-input form-textarea" rows="3" placeholder=" "></textarea>
+              <label for="formMessage" class="form-label">Mensagem (opcional)</label>
+              <span class="form-border"></span>
+            </div>
+
+            <button type="submit" class="btn-submit" id="formSubmit">
+              <span class="btn-submit-text">Enviar Agendamento</span>
+              <span class="btn-submit-loading" style="display:none;">
+                <svg class="spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                Enviando...
+              </span>
+            </button>
+          </form>
+
+          <!-- Success State -->
+          <div class="form-success glass-card" id="formSuccess" style="display:none;">
+            <div class="success-icon">✓</div>
+            <h3>Mensagem Enviada!</h3>
+            <p>Obrigado pelo interesse no Vita Premium Coworking. Nossa equipe entrará em contato em até 2 horas úteis para confirmar sua visita.</p>
+            <button class="btn-ghost" id="resetForm">Enviar outra mensagem</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-glow"></div>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#hero" class="logo">
+          <div class="logo-icon">V</div>
+          <span class="logo-name">ita <em>Premium</em></span>
+        </a>
+        <p>Espaços que inspiram, conexões que transformam.</p>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Espaços</h4>
+          <ul>
+            <li><a href="#services">Salas Privativas</a></li>
+            <li><a href="#services">Mesas Compartilhadas</a></li>
+            <li><a href="#services">Salas de Reunião</a></li>
+            <li><a href="#services">Auditório</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#about">Sobre o Vita</a></li>
+            <li><a href="#gallery">Galeria</a></li>
+            <li><a href="#testimonials">Depoimentos</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <ul>
+            <li><a href="https://wa.me/5531973313868" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="#" aria-label="Instagram">Instagram</a></li>
+            <li><a href="#" aria-label="LinkedIn">LinkedIn</a></li>
+            <li><a href="#contact">Agendar Visita</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Vita Premium Coworking. Todos os direitos reservados. · <a href="#" class="footer-policy-link" id="openPrivacy">Política de Privacidade</a></p>
+      <p>Desenvolvido com ✦ para mentes extraordinárias.</p>
+    </div>
+  </footer>
+
+  <!-- ===== FLOATING WHATSAPP BUTTON ===== -->
+  <a href="https://wa.me/5531973313868?text=Ol%C3%A1!%20Vi%20o%20site%20do%20Vita%20Premium%20Coworking%20e%20gostaria%20de%20saber%20mais."
+     class="whatsapp-float"
+     id="whatsappFloat"
+     target="_blank"
+     rel="noopener"
+     aria-label="Fale conosco pelo WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+    </svg>
+    <span class="whatsapp-tooltip">Fale conosco!</span>
+  </a>
+
+  <script src="script.js"></script>
+
+  <!-- Privacy Modal -->
+  <div class="privacy-modal" id="privacyModal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle">
+    <div class="privacy-modal-inner glass-card">
+      <button class="privacy-modal-close" id="privacyModalClose" aria-label="Fechar">✕</button>
+      <h3 id="privacyModalTitle">Política de Privacidade &amp; Cookies</h3>
+      <div class="privacy-modal-body">
+        <p>O <strong>Vita Premium Coworking</strong> respeita sua privacidade. Esta política explica como utilizamos cookies e dados de navegação.</p>
+        <h4>Cookies Essenciais</h4>
+        <p>Necessários para o funcionamento básico do site, como preferências de sessão e segurança. Não podem ser desativados.</p>
+        <h4>Cookies Analíticos</h4>
+        <p>Nos ajudam a entender como os visitantes interagem com o site, permitindo melhorias contínuas na experiência do usuário.</p>
+        <h4>Seus Direitos</h4>
+        <p>Você pode revogar o consentimento a qualquer momento. Não vendemos nem compartilhamos seus dados com terceiros para fins comerciais.</p>
+        <h4>Contato</h4>
+        <p>Dúvidas? Entre em contato: <a href="mailto:contato@vitacoworking.com.br">contato@vitacoworking.com.br</a></p>
+      </div>
+      <button class="cookie-btn-accept" onclick="document.getElementById('privacyModal').style.display='none'">Entendido</button>
+    </div>
+  </div>
+</body>
+</html>
